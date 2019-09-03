@@ -1,0 +1,19 @@
+{
+  "name": "job-affinity-finder",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saranrajshri/Job-Affinity-Finder.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saranrajshri/Job-Affinity-Finder/issues"
+  },
+  "homepage": "https://github.com/saranrajshri/Job-Affinity-Finder#readme"
+}
