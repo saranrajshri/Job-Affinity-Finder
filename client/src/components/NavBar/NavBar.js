@@ -13,7 +13,7 @@ class NavBarHeader extends React.Component {
         </Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
-          <Button variant="warning" className="mr-2">
+          <Button variant="warning" href="/companyLogin" className="mr-2">
             Login
           </Button>
           <Button variant="success">Register</Button>

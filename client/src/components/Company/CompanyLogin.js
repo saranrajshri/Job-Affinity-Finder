@@ -4,9 +4,53 @@ import React from "react";
 import NavBarHeader from "../NavBar/NavBar";
 
 // Bootstrap Components
-import { Row, Col, Container, Form, Button } from "react-bootstrap";
+import { Row, Col, Container, Form, Button, Spinner } from "react-bootstrap";
+
+// axios
+import axios from "axios";
 
 class CompanyLogin extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      email: "",
+      password: "",
+      isLoading: "",
+      errorText: ""
+    };
+  }
+
+  // update inputs values to state
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Login btn action
+  handleLogin = () => {
+    // Show Spinner
+    this.setState({ isLoading: true });
+    // Check For null inputs
+    if (this.state.email === "" && this.state.password === "") {
+      this.setState({
+        errorText: "Enter All Fields"
+      });
+    } else {
+      axios
+        .post("http://localhost:8000/api/company/login", {
+          email: this.state.email,
+          password: this.state.password
+        })
+        .then(response => {
+          // save the auth token in local storage
+          localStorage.setItem("authToken", response.data["token"]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
   render() {
     return (
       <div>
@@ -21,16 +65,35 @@ class CompanyLogin extends React.Component {
                 <div className="mt-3">
                   <Form.Control
                     type="email"
+                    name="email"
+                    onChange={this.handleChange}
+                    autoComplete="off"
                     placeholder="Email"
                     className="mb-3"
                   />
                   <Form.Control
                     type="password"
+                    name="password"
+                    onChange={this.handleChange}
                     placeholder="Password"
                     className="mb-3"
                   />
-
-                  <Button variant="success">Login</Button>
+                  {this.state.isLoading ? (
+                    <Button variant="success" disabled>
+                      <Spinner
+                        as="span"
+                        animation="grow"
+                        size="sm"
+                        role="status"
+                        aria-hidden="true"
+                      />
+                      Loading...
+                    </Button>
+                  ) : (
+                    <Button variant="success" onClick={this.handleLogin}>
+                      Login
+                    </Button>
+                  )}
                 </div>
                 {/* Form End */}
               </div>
