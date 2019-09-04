@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 // Components
 import CompanyRegister from "./components/Company/CompanyRegister";
 import CompanyLogin from "./components/Company/CompanyLogin";
+import CompanyDashBoard from "./components/Company/CompanyDashBoard";
 
 //React Router(dont change the order of this react router)
 const Route = require("react-router-dom").Route;
@@ -22,6 +23,11 @@ function App() {
           component={CompanyRegister}
         ></Route>
         <Route path="/companyLogin" exact component={CompanyLogin}></Route>
+        <Route
+          path="/company/dashboard"
+          exact
+          component={CompanyDashBoard}
+        ></Route>
       </Router>
     </div>
   );

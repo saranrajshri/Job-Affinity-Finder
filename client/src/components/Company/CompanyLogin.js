@@ -45,6 +45,8 @@ class CompanyLogin extends React.Component {
         .then(response => {
           // save the auth token in local storage
           localStorage.setItem("authToken", response.data["token"]);
+          // redirect to dashboard
+          window.location = "/company/dashboard";
         })
         .catch(err => {
           console.log(err);

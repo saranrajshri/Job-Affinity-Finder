@@ -68,7 +68,7 @@ router.post("/login", function(req, res) {
 });
 
 // dummy route
-router.post("/get", verifyToken, function(req, res) {
+router.post("/getCompanyDetails", verifyToken, function(req, res) {
   jwt.verify(req.token, "secretkey", (err, authData) => {
     if (err) {
       res.sendStatus(403);
