@@ -28,7 +28,8 @@ router.post("/register", function(req, res) {
           companyName: req.body.companyName,
           userName: req.body.userName,
           email: req.body.email,
-          password: hashedPassword
+          password: hashedPassword,
+          jobPosts: []
         };
         var company = new Company(data);
         company.save().then(function(response) {
@@ -79,6 +80,20 @@ router.post("/getCompanyDetails", verifyToken, function(req, res) {
       });
     }
   });
+});
+
+// Post a new job
+router.post("/createNewPost", verifyToken, function(req, res) {
+  Company.findByIdAndUpdate({
+    _id: req.body.companyID,
+    jobPosts: req.body.jobPosts
+  })
+    .then(response => {
+      res.send(response);
+    })
+    .catch(err => {
+      res.send(err);
+    });
 });
 
 // verify jwt token

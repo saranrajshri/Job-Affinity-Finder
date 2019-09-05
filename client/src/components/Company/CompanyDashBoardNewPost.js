@@ -14,9 +14,9 @@ import { Container, Row, Col } from "react-bootstrap";
 // Components
 import CompanyDashBoardDetails from "./CompanyDashBoardDetails";
 import CompanyDashBoardActions from "./CompanyDashBoardActions";
-import CompanyDashBoardQuickBox from "./CompanyDashBoardQuickBox";
+import CompanyDashBoardPostForm from "./CompanyDashBoardPostForm";
 
-class CompanyDashBoard extends React.Component {
+class CompanyDashBoardNewPost extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -50,7 +50,7 @@ class CompanyDashBoard extends React.Component {
                 <CompanyDashBoardActions />
               </Col>
               <Col md={9}>
-                <CompanyDashBoardQuickBox />
+                <CompanyDashBoardPostForm />
               </Col>
             </Row>
           </Container>
@@ -61,4 +61,4 @@ class CompanyDashBoard extends React.Component {
     }
   }
 }
-export default CompanyDashBoard;
+export default CompanyDashBoardNewPost;

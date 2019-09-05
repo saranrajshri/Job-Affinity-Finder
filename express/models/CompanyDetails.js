@@ -13,7 +13,15 @@ const CompanySchema = new Schema({
   },
   password: {
     type: String
-  }
+  },
+  jobPosts: [
+    {
+      title: String,
+      description: String,
+      experience: String,
+      languages: String
+    }
+  ]
 });
 const companyModel = mongoose.model("companyModel", CompanySchema);
 module.exports = companyModel;
