@@ -10,14 +10,16 @@ import { Row, Col, Container, Form, Button, Spinner } from "react-bootstrap";
 // axios
 import axios from "axios";
 
-class CompanyRegister extends React.Component {
+class UserRegister extends React.Component {
   constructor() {
     super();
     this.state = {
-      companyName: "",
       userName: "",
       email: "",
       password: "",
+      twitterName: "",
+      redditName: "",
+      stackOverFlowId: "",
       isLoading: false,
       errorText: ""
     };
@@ -36,22 +38,25 @@ class CompanyRegister extends React.Component {
       isLoading: true
     });
     if (
-      this.state.companyName === "" &&
       this.state.userName === "" &&
       this.state.email === "" &&
-      this.state.password === ""
+      this.state.password === "" &&
+      this.state.twitterName === "" &&
+      this.state.redditName === "" &&
+      this.state.stackOverFlowId === ""
     ) {
       this.setState({
         errorText: "Enter All The Fields"
       });
     } else {
       axios
-        .post("http://localhost:8000/api/company/register", {
-          companyName: this.state.companyName,
+        .post("http://localhost:8000/api/user/register", {
           userName: this.state.userName,
           email: this.state.email,
           password: this.state.password,
-          jobPosts: []
+          twitterName: this.state.twitterName,
+          redditName: this.state.redditName,
+          stackOverFlowId: this.state.stackOverFlowId
         })
         .then(response => {
           console.log(response);
@@ -70,21 +75,12 @@ class CompanyRegister extends React.Component {
             <Col md={4}></Col>
             <Col md={4}>
               <div className="border border-muted p-3 mt-3 ">
-                <h5 className="text-dark">Register Your Company</h5>
+                <h5 className="text-dark">Register Your Account</h5>
                 <Form.Text className="text-danger">
                   {this.state.errorText}
                 </Form.Text>
                 {/* F/orm */}
                 <div className="mt-3">
-                  <Form.Control
-                    type="text"
-                    name="companyName"
-                    placeholder="Company Name"
-                    className="mb-3"
-                    autoComplete="off"
-                    onChange={this.handleChange}
-                  />
-
                   <Form.Control
                     type="text"
                     name="userName"
@@ -106,6 +102,30 @@ class CompanyRegister extends React.Component {
                     name="password"
                     placeholder="Password"
                     className="mb-3"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Control
+                    type="text"
+                    name="twitterName"
+                    placeholder="Twitter Name"
+                    className="mb-3"
+                    autoComplete="off"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Control
+                    type="text"
+                    name="redditName"
+                    placeholder="Reddit Name"
+                    className="mb-3"
+                    autoComplete="off"
+                    onChange={this.handleChange}
+                  />
+                  <Form.Control
+                    type="text"
+                    name="stackOverFlowId"
+                    placeholder="StackOverflow ID"
+                    className="mb-3"
+                    autoComplete="off"
                     onChange={this.handleChange}
                   />
                   <Form.Check
@@ -141,4 +161,4 @@ class CompanyRegister extends React.Component {
     );
   }
 }
-export default CompanyRegister;
+export default UserRegister;

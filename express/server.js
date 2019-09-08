@@ -9,6 +9,7 @@ const config = require("./config/database");
 
 // Routes import
 const companyRoutes = require("./routes/CompanyRoutes");
+const UserRoutes = require("./routes/UserRoutes");
 
 // DB connnection
 mongoose
@@ -24,7 +25,7 @@ app.use(bodyParser.json());
 
 // Routes
 app.use("/api/company", companyRoutes);
-
+app.use("/api/user", UserRoutes);
 // Run app
 const port = process.eventNames.PORT || 8000;
 app.listen(port, () => {

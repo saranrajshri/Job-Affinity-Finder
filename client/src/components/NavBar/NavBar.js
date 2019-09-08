@@ -62,7 +62,9 @@ class NavBarHeader extends React.Component {
             <Button variant="warning" href="/companyLogin" className="mr-2">
               Login
             </Button>
-            <Button variant="success">Register</Button>
+            <Button variant="success" href="/companyRegister">
+              Register
+            </Button>
           </Navbar.Collapse>
         )}
       </Navbar>

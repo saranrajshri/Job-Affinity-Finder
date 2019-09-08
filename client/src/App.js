@@ -6,9 +6,14 @@ import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router } from "react-router-dom";
 
 // Components
+
+// Company
 import CompanyRegister from "./components/Company/CompanyRegister";
 import CompanyLogin from "./components/Company/CompanyLogin";
 import CompanyDashBoard from "./components/Company/CompanyDashBoard";
+// User
+import UserRegister from "./components/User/UserRegister";
+import UserLogin from "./components/User/UserLogin";
 
 //React Router(dont change the order of this react router)
 const Route = require("react-router-dom").Route;
@@ -28,6 +33,8 @@ function App() {
           exact
           component={CompanyDashBoard}
         ></Route>
+        <Route path="/userRegister" exact component={UserRegister}></Route>
+        <Route path="/userLogin" exact component={UserLogin}></Route>
       </Router>
     </div>
   );

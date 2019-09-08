@@ -10,7 +10,7 @@ import { Row, Col, Container, Form, Button, Spinner } from "react-bootstrap";
 // axios
 import axios from "axios";
 
-class CompanyLogin extends React.Component {
+class UserLogin extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -63,7 +63,7 @@ class CompanyLogin extends React.Component {
             <Col md={4}></Col>
             <Col md={4}>
               <div className="border border-muted p-3 mt-3 ">
-                <h5 className="text-dark mmb-4">Company Login</h5>
+                <h5 className="text-dark mmb-4">User Login</h5>
                 {/* F/orm */}
                 <div className="mt-3">
                   <Form.Control
@@ -109,4 +109,4 @@ class CompanyLogin extends React.Component {
     );
   }
 }
-export default CompanyLogin;
+export default UserLogin;
