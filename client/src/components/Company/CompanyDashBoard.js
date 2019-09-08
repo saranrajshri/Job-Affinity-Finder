@@ -15,12 +15,18 @@ import { Container, Row, Col } from "react-bootstrap";
 import CompanyDashBoardDetails from "./CompanyDashBoardDetails";
 import CompanyDashBoardActions from "./CompanyDashBoardActions";
 import CompanyDashBoardQuickBox from "./CompanyDashBoardQuickBox";
+import CompanyDashBoardNewPostForm from "./CompanyDashBoardPostForm";
+
+// Context
+import CompanyContext from "./CompanyContext";
 
 class CompanyDashBoard extends React.Component {
   constructor() {
     super();
     this.state = {
-      showPage: false
+      showPage: false,
+      companyData: [],
+      isNewPostOpen: false
     };
   }
   componentDidMount() {
@@ -34,14 +40,59 @@ class CompanyDashBoard extends React.Component {
         {},
         { headers: headers }
       )
-      .then(() => {
-        this.setState({ showPage: true });
+      .then(response => {
+        this.setState({
+          showPage: true
+        });
+
+        // get all details of the company
+        axios
+          .post("http://localhost:8000/api/company/getAllDetails", {
+            email: response.data.authData.companyData.email
+          })
+          .then(response => {
+            this.setState({ companyData: response.data[0] });
+          });
+
+        localStorage.setItem(
+          "companyEmail",
+          response.data.authData.companyData.email
+        );
       });
   }
+
+  // update company data
+  updateCompanyData = data => {
+    this.setState({
+      companyData: data
+    });
+  };
+
+  // show
+  showCreateNewPost = () => {
+    this.setState({
+      isNewPostOpen: true
+    });
+  };
+
+  // Show Quick BOx
+  showJobApplications = () => {
+    this.setState({
+      showJobApplications: true,
+      isNewPostOpen: false
+    });
+  };
   render() {
     if (this.state.showPage === true) {
       return (
-        <div>
+        <CompanyContext.Provider
+          value={{
+            ...this.state,
+            updateCompanyData: this.updateCompanyData,
+            showCreateNewPost: this.showCreateNewPost,
+            showJobApplications: this.showJobApplications
+          }}
+        >
           <NavBarHeader />
           <Container className="mt-3">
             <Row>
@@ -50,15 +101,20 @@ class CompanyDashBoard extends React.Component {
                 <CompanyDashBoardActions />
               </Col>
               <Col md={9}>
-                <CompanyDashBoardQuickBox />
+                {this.state.isNewPostOpen ? (
+                  <CompanyDashBoardNewPostForm />
+                ) : (
+                  <CompanyDashBoardQuickBox />
+                )}
               </Col>
             </Row>
           </Container>
-        </div>
+        </CompanyContext.Provider>
       );
     } else {
       return null;
     }
   }
 }
+CompanyDashBoard.contextType = CompanyContext;
 export default CompanyDashBoard;

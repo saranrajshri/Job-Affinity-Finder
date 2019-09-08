@@ -1,4 +1,8 @@
 import React from "react";
+
+// Context
+import CompanyContext from "./CompanyContext";
+
 class CompanyDashBoardActions extends React.Component {
   render() {
     return (
@@ -6,18 +10,26 @@ class CompanyDashBoardActions extends React.Component {
         <h5 className="pt-2 pl-2">Actions</h5>
         <hr />
         <div className="">
-          <a href="/company/newpost" className="btn btn-link">
+          <button
+            onClick={this.context.showCreateNewPost}
+            className="btn btn-link"
+          >
             Post A New Job Vacancy
-          </a>
-          <a href="#" className="btn btn-link">
+          </button>
+          <button href="#" className="btn btn-link">
             Search For Candidates
-          </a>
-          <a href="#" className="btn btn-link">
+          </button>
+          <button
+            href="#"
+            onClick={this.context.showJobApplications}
+            className="btn btn-link"
+          >
             View Job Applications
-          </a>
+          </button>
         </div>
       </div>
     );
   }
 }
+CompanyDashBoardActions.contextType = CompanyContext;
 export default CompanyDashBoardActions;

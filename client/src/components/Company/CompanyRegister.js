@@ -49,7 +49,8 @@ class CompanyRegister extends React.Component {
           companyName: this.state.companyName,
           userName: this.state.userName,
           email: this.state.email,
-          password: this.state.password
+          password: this.state.password,
+          jobPosts: []
         })
         .then(response => {
           console.log(response);

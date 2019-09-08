@@ -14,14 +14,10 @@ const CompanySchema = new Schema({
   password: {
     type: String
   },
-  jobPosts: [
-    {
-      title: String,
-      description: String,
-      experience: String,
-      languages: String
-    }
-  ]
+  jobPosts: {
+    type: Array,
+    default: void 0
+  }
 });
 const companyModel = mongoose.model("companyModel", CompanySchema);
 module.exports = companyModel;

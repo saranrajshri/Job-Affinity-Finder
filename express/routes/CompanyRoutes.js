@@ -29,7 +29,7 @@ router.post("/register", function(req, res) {
           userName: req.body.userName,
           email: req.body.email,
           password: hashedPassword,
-          jobPosts: []
+          jobPosts: req.body.jobPosts
         };
         var company = new Company(data);
         company.save().then(function(response) {
@@ -75,25 +75,41 @@ router.post("/getCompanyDetails", verifyToken, function(req, res) {
       res.sendStatus(403);
     } else {
       res.json({
-        message: "hello",
         authData
       });
     }
   });
 });
 
-// Post a new job
-router.post("/createNewPost", verifyToken, function(req, res) {
-  Company.findByIdAndUpdate({
-    _id: req.body.companyID,
-    jobPosts: req.body.jobPosts
-  })
+//get all details
+router.post("/getAllDetails", function(req, res) {
+  Company.find({ email: req.body.email })
     .then(response => {
       res.send(response);
     })
     .catch(err => {
-      res.send(err);
+      console.log(err);
     });
+});
+
+// Post a new job
+router.post("/createNewPost", verifyToken, function(req, res) {
+  jwt.verify(req.token, "secretkey", (err, authData) => {
+    if (err) {
+      res.sendStatus(403);
+    } else {
+      Company.update(
+        { email: req.body.email },
+        { $push: { jobPosts: req.body.jobPost } }
+      )
+        .then(response => {
+          res.send(response);
+        })
+        .catch(err => {
+          res.send(err);
+        });
+    }
+  });
 });
 
 // verify jwt token
