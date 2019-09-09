@@ -39,15 +39,15 @@ class UserLogin extends React.Component {
       });
     } else {
       axios
-        .post("http://localhost:8000/api/company/login", {
+        .post("http://localhost:8000/api/user/login", {
           email: this.state.email,
           password: this.state.password
         })
         .then(response => {
           // save the auth token in local storage
-          localStorage.setItem("authToken", response.data["token"]);
+          localStorage.setItem("userAuthToken", response.data["token"]);
           // redirect to dashboard
-          window.location = "/company/dashboard";
+          window.location = "/user/dashboard";
         })
         .catch(err => {
           console.log(err);

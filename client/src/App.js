@@ -14,6 +14,7 @@ import CompanyDashBoard from "./components/Company/CompanyDashBoard";
 // User
 import UserRegister from "./components/User/UserRegister";
 import UserLogin from "./components/User/UserLogin";
+import UserDashBoard from "./components/User/UserDashBoard";
 
 //React Router(dont change the order of this react router)
 const Route = require("react-router-dom").Route;
@@ -35,6 +36,7 @@ function App() {
         ></Route>
         <Route path="/userRegister" exact component={UserRegister}></Route>
         <Route path="/userLogin" exact component={UserLogin}></Route>
+        <Route path="/user/dashboard" exact component={UserDashBoard}></Route>
       </Router>
     </div>
   );

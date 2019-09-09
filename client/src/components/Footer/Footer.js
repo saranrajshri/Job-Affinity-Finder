@@ -11,25 +11,23 @@ class Footer extends React.Component {
           <Col md={4}></Col>
           <Col md={4}>
             <center className="mt-2">
-              <a href="#" className="mr-2">
-                Login
-              </a>
-              <a href="#" className="mr-2">
+              <button className="btn btn-link mr-2">Login</button>
+              <button href="#" className="btn btn-link mr-2">
                 Register
-              </a>
-              <a href="#" className="mr-2">
+              </button>
+              <button href="#" className="btn btn-link  mr-2">
                 Contact Us
-              </a>
+              </button>
             </center>
 
             <center>
               a{" "}
-              <a
+              <button
                 href="https://www.linkedin.com/in/saranrajshri/"
-                className="text-primary"
+                className="text-primary btn btn-link"
               >
                 Shrisaranraj
-              </a>{" "}
+              </button>{" "}
               production
             </center>
           </Col>

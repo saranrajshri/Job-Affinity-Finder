@@ -46,7 +46,7 @@ router.post("/login", function(req, res) {
     .exec()
     .then(user => {
       if (user.length >= 1) {
-        var actualPassword = company[0].password;
+        var actualPassword = user[0].password;
         var salt = actualPassword.split("$")[2];
         var hashedPassword = hash(req.body.password, salt);
         if (actualPassword == hashedPassword) {
