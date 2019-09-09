@@ -10,13 +10,15 @@ class NavBarHeader extends React.Component {
   constructor() {
     super();
     this.state = {
-      isCompanyLoggedIn: false
+      isCompanyLoggedIn: false,
+      isUserLoggedIn: false
     };
   }
 
   // Logout action
   handleLogout = () => {
     localStorage.setItem("authToken", "");
+    localStorage.setItem("userAuthToken", "");
     window.location = "/companyLogin";
   };
   componentDidMount() {
@@ -35,6 +37,24 @@ class NavBarHeader extends React.Component {
           this.setState({ isCompanyLoggedIn: true });
         }
       });
+
+    // ///////
+    const userHeaders = {
+      Authorization: "Bearer " + localStorage.getItem("userAuthToken")
+    };
+    axios
+      .post(
+        "http://localhost:8000/api/user/getUserDetails",
+        {},
+        { headers: userHeaders }
+      )
+      .then(response => {
+        if (response.status !== 403) {
+          this.setState({
+            isUserLoggedIn: true
+          });
+        }
+      });
   }
   render() {
     return (
@@ -45,9 +65,24 @@ class NavBarHeader extends React.Component {
         </Navbar.Brand>
         <Navbar.Toggle />
         {this.state.isCompanyLoggedIn ? (
+          // Company
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
               Signed in as: <a href="#login">Mark Otto</a>
+            </Navbar.Text>
+            <Button
+              variant="warning"
+              className="ml-2"
+              onClick={this.handleLogout}
+            >
+              Logout
+            </Button>
+          </Navbar.Collapse>
+        ) : this.state.isUserLoggedIn ? (
+          // User
+          <Navbar.Collapse className="justify-content-end">
+            <Navbar.Text>
+              Signed in as: <a href="#login">User</a>
             </Navbar.Text>
             <Button
               variant="warning"
