@@ -16,6 +16,7 @@ import CompanyDashBoardDetails from "./CompanyDashBoardDetails";
 import CompanyDashBoardActions from "./CompanyDashBoardActions";
 import CompanyDashBoardQuickBox from "./CompanyDashBoardQuickBox";
 import CompanyDashBoardNewPostForm from "./CompanyDashBoardPostForm";
+import CompanyDashBoardManageTeam from "./CompanyDashBoardManageTeam";
 
 // Context
 import CompanyContext from "./CompanyContext";
@@ -26,7 +27,8 @@ class CompanyDashBoard extends React.Component {
     this.state = {
       showPage: false,
       companyData: [],
-      isNewPostOpen: false
+      isNewPostOpen: false,
+      isManageTeamOpen: false
     };
   }
   componentDidMount() {
@@ -79,7 +81,16 @@ class CompanyDashBoard extends React.Component {
   showJobApplications = () => {
     this.setState({
       showJobApplications: true,
-      isNewPostOpen: false
+      isNewPostOpen: false,
+      isManageTeamOpen: false
+    });
+  };
+  // show Manage team
+  showManageTeam = () => {
+    this.setState({
+      isManageTeamOpen: true,
+      isNewPostOpen: false,
+      showJobApplications: false
     });
   };
   render() {
@@ -90,7 +101,8 @@ class CompanyDashBoard extends React.Component {
             ...this.state,
             updateCompanyData: this.updateCompanyData,
             showCreateNewPost: this.showCreateNewPost,
-            showJobApplications: this.showJobApplications
+            showJobApplications: this.showJobApplications,
+            showManageTeam: this.showManageTeam
           }}
         >
           <NavBarHeader />
@@ -103,8 +115,10 @@ class CompanyDashBoard extends React.Component {
               <Col md={9}>
                 {this.state.isNewPostOpen ? (
                   <CompanyDashBoardNewPostForm />
+                ) : this.state.isManageTeamOpen ? (
+                  <CompanyDashBoardManageTeam />
                 ) : (
-                  <CompanyDashBoardQuickBox />
+                  <CompanyDashBoardManageTeam />
                 )}
               </Col>
             </Row>

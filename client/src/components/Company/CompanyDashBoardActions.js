@@ -16,6 +16,13 @@ class CompanyDashBoardActions extends React.Component {
           >
             Post A New Job Vacancy
           </button>
+          <button
+            href="#"
+            onClick={this.context.showManageTeam}
+            className="btn btn-link"
+          >
+            Manage Your Team
+          </button>
           <button href="#" className="btn btn-link">
             Search For Candidates
           </button>
