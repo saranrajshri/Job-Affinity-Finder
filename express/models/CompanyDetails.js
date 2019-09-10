@@ -17,6 +17,10 @@ const CompanySchema = new Schema({
   jobPosts: {
     type: Array,
     default: void 0
+  },
+  teams: {
+    type: Array,
+    default: void 0
   }
 });
 const companyModel = mongoose.model("companyModel", CompanySchema);

@@ -29,7 +29,8 @@ router.post("/register", function(req, res) {
           userName: req.body.userName,
           email: req.body.email,
           password: hashedPassword,
-          jobPosts: req.body.jobPosts
+          jobPosts: req.body.jobPosts,
+          teams: []
         };
         var company = new Company(data);
         company.save().then(function(response) {
@@ -110,6 +111,20 @@ router.post("/createNewPost", verifyToken, function(req, res) {
         });
     }
   });
+});
+
+// add a new team
+router.post("/createNewTeam", function(req, res) {
+  Company.update(
+    { email: req.body.email },
+    { $push: { teams: req.body.teams } }
+  )
+    .then(response => {
+      res.send(response);
+    })
+    .catch(err => {
+      res.send(err);
+    });
 });
 
 // verify jwt token
