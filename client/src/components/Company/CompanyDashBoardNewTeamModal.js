@@ -17,6 +17,7 @@ class CompanyDashBoardNewTeamModal extends React.Component {
       name: "",
       twitterName: "",
       redditName: "",
+      redditPassword: "",
       stackOverFlowID: ""
     };
   }
@@ -30,28 +31,41 @@ class CompanyDashBoardNewTeamModal extends React.Component {
 
   //  submit action
   addNewTeam = () => {
+    // get twitter data and personality insights
     axios
-      .post("http://localhost:8000/api/company/createNewTeam", {
-        email: this.context.companyData.email,
-        teams: {
-          teamName: this.state.teamName,
-          members: [
-            {
-              name: this.state.name,
-              twitterName: this.state.twitterName,
-              redditName: this.state.redditName,
-              stackOverFlowID: this.state.stackOverFlowID
-            }
-          ]
-        }
-      })
-      .then(response => {
-        console.log(response);
-        this.props.handleClose();
-      })
-      .catch(err => {
-        console.log(err);
-      });
+      .get(
+        "http://127.0.0.1:5000/api/getUserDetails?twitter_name=" +
+          this.state.twitterName +
+          "&reddit_name=" +
+          this.state.redditName +
+          "&reddit_password=" +
+          this.state.redditPassword +
+          "&stackOverflowID=" +
+          this.state.stackOverFlowID
+      )
+      .then(response => {});
+    // axios
+    //   .post("http://localhost:8000/api/company/createNewTeam", {
+    //     email: this.context.companyData.email,
+    //     teams: {
+    //       teamName: this.state.teamName,
+    //       members: [
+    //         {
+    //           name: this.state.name,
+    //           twitterName: this.state.twitterName,
+    //           redditName: this.state.redditName,
+    //           stackOverFlowID: this.state.stackOverFlowID
+    //         }
+    //       ]
+    //     }
+    //   })
+    //   .then(response => {
+    //     console.log(response);
+    //     this.props.handleClose();
+    //   })
+    //   .catch(err => {
+    //     console.log(err);
+    //   });
   };
 
   render() {
